@@ -199,18 +199,17 @@ def main():
     
     # B is the new matrix without the steiner vertices
     B = [lis[i:i+n] for i in range(0, len(lis), n)]
-    
+    print(B)
     # Apply MST on B
     # MST is stored in C
     K = kruskal(B)
     C = []
-    cost = 0
+   
     for c in K:
         # making the vertices names valid
         C.append([vertices[c[0]],vertices[c[1]]])
-        # calculating the cost
-        cost += B[c[0]][c[1]]
-    
+        
+    print(K)
 
     # add the steiner vertices back to the MST
     E = [[0]*len(A) for i in range(len(A))]
@@ -225,7 +224,12 @@ def main():
             if E[i][j] == 1:
                 print(str(j+1),end = " ")
         print()
-    
+    # calculate the cost
+    cost = 0
+    for i in range(len(E)):
+        for j in range(i,len(E)):
+            if E[i][j] == 1:
+                cost += A[i][j]
     print("The cost of the 2-factor approximate tree is:",cost)
 
 if __name__ == '__main__':
